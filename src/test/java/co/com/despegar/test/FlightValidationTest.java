@@ -87,23 +87,48 @@ public class FlightValidationTest {
 		driver_action.click(driver_button).perform();
 	}
 	
+	public void clickOnFirstElementbyTag(WebDriver driver, String tagname) {
+			
+		WebElement driver_button = driver.findElement(By.tagName(tagname));
+	
+		Actions driver_action = new Actions(driver);
+	
+		driver_action.click(driver_button).perform();
+	}
 	/*public void waitForVisibility(WebDriver driver, String classname) {
 		WebDriverWait driver_wait
 	}*/
+	
+	public boolean checkTagExistence(WebDriver driver, String tagname) {
+		try {
+			
+			WebElement driver_item = driver.findElement(By.tagName(tagname));
+			ExpectedConditions.visibilityOf(driver_item);
+			
+			return true;
+			
+		}catch (Exception e) {
+			return false;
+		}
+	}
 	
 	@Test
 	public void testFlightScreen() throws Exception{
 		
 		pickOption(driver, from_flight_searchbox_locator, " Medellin");
-		pickOption(driver, to_flight_searchbox_locator, " Bogota");
+		pickOption(driver, to_flight_searchbox_locator, " Amsterdam");
 		pickDate(driver, depart_date_searchbox_locator);
 		
-		clickOnButtonNamed(driver, "Buscar");
+		//clickOnButtonNamed(driver, "Buscar");
+		clickOnFirstElementbyTag(driver, "button");
 		TimeUnit.SECONDS.sleep(10);	
-		clickOnButtonNamed(driver, "Seleccionar");
+		clickOnFirstElementbyTag(driver, "buy-button");
+		TimeUnit.SECONDS.sleep(5);
+		if(checkTagExistence(driver, "upselling-popup") == true){
+			clickOnButtonNamed(driver, "Continuar");
+		}
 		TimeUnit.SECONDS.sleep(10);
-		
-		
+	
 	}
 	
 	@After

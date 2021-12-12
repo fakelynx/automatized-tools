@@ -16,7 +16,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
+// here's missing the Javadoc.
 public class FlightValidationTest {
 	
 	private WebDriver driver;
@@ -100,7 +100,7 @@ public class FlightValidationTest {
 		
 		clickOnButtonNamed(driver, "Buscar");
 		TimeUnit.SECONDS.sleep(10);	
-		clickOnButtonNamed(driver, "Comprar");
+		clickOnButtonNamed(driver, "Seleccionar");
 		TimeUnit.SECONDS.sleep(10);
 		
 		

@@ -8,6 +8,10 @@ Now you'll find each of the acceptance criteria and how they were implemented in
 In this repository you'll find the full Java/Maven based project based on the frameworks: JUnit, Selenium, Cucumber. Where the directory structure is as follows:
   * src/test: Folder where used packages and resources can be found. 
     * java/co/com/despegar: Folder where the source code and java packages can be found.
+      * features: File with the Gherkin description of test Scenario.
+      * gluecode: Java Implementation of Gherkin description using JUnit Selenium and Cucumber and Hooks to be executed before and after every scenario.
+      * test: Entry Class with CucumberOptions. 
+        * browsermanager: Abstraction and implementation of Abstract Factory to handle multiple WebDrivers.
     * resources: Folder where the used WebDrivers can be found.
   * .gitignore: File to avoid git from tracking unwanted/IDE related files.
   * pom.xml: Maven Dependencies File.

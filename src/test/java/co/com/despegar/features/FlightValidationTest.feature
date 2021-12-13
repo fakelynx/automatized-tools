@@ -1,7 +1,7 @@
 
 @Search
 Feature: Despegar.com.co Flight Validation BOG MDE
-	I want to validate the selection screen of a flight in Despegar.com from Bogota to Medellin, with any departure/arrival date.
+	As a user I want to validate the selection screen of a flight in Despegar.com from Bogota to Medellin, with any departure/arrival date.
 	
 	Scenario: Validate Selection of a Flight with specified cities and dates
 		Given The user is at Despegar.com.co Home Page.

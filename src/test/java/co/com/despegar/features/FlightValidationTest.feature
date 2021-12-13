@@ -13,7 +13,7 @@ Feature: Despegar.com.co Flight Validation BOG MDE
 		And They pick the highlighted city in the menu
 		And They pick the "15" and "25" as dates for the flight
 		And They click on Search button
-		And They wait for the page to load
+		And They go to the results page
 		And They click on the first available flight
 		And They check if theres an upsell popup to click continue
 		Then They check the next page to match the expected screen.

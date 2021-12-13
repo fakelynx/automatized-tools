@@ -2,7 +2,6 @@ package co.com.despegar.gluecode;
 
 import static org.junit.Assert.assertEquals;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -18,11 +17,11 @@ import io.cucumber.java.en.When;
 
 public class FlightValidationTestGluecode {
 	
-	private ChromeDriver driver;
-	WebElement driver_element;
-	Actions driver_action;
-	WebDriverWait driver_wait_short;
-	WebDriverWait driver_wait_long;
+	ChromeDriver driver = FlightValidationTestHooks.getDriver();
+	WebElement driver_element = FlightValidationTestHooks.getDriver_element();
+	Actions driver_action = FlightValidationTestHooks.getDriver_action();
+	WebDriverWait driver_wait_short = FlightValidationTestHooks.getDriver_wait_short();
+	WebDriverWait driver_wait_long = FlightValidationTestHooks.getDriver_wait_long();
 	
 	public void clickOnSomething(By xpath) throws InterruptedException {
 		driver_element = driver.findElement(xpath);
@@ -36,15 +35,8 @@ public class FlightValidationTestGluecode {
 	
 	@Given("The user is at Despegar.com.co Home Page.")
 	public void the_user_is_at_despegar_com_co_home_page() {
-	    
-		System.setProperty("webdriver.chrome.driver", "./src/test/resources/driver-chrome/chromedriver_96.0.4664.45.exe");
-	    driver = new ChromeDriver();
-	    driver.manage().window().maximize();
-	    driver.get("https://www.despegar.com.co");
-	    driver_action = new Actions(driver);
-	    driver_wait_short = new WebDriverWait(driver, Duration.ofSeconds(2));
-	    driver_wait_long = new WebDriverWait(driver, Duration.ofSeconds(30));
-		
+		String title = "Agencia de viajes y turismo líder en América Latina | Despegar";
+		assertEquals(title, driver.getTitle());
 	}
 	@When("They click on From city searchbox")
 	public void they_click_on_from_city_searchbox() throws InterruptedException {
@@ -85,13 +77,16 @@ public class FlightValidationTestGluecode {
 		By search_button_locator = By.xpath("//button [@type ='button']");
 	    clickOnSomething(search_button_locator);
 	}
-	@When("They wait for the page to load")
-	public void they_wait_for_the_page_to_load() {
-		driver_wait_long.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div [@class = 'main-content -show']")));
+	@When("They go to the results page")
+	public void they_go_to_the_results_page() throws InterruptedException {
+	    String title = "Despegar . Resultados de Vuelos";
+	    assertEquals(title, driver.getTitle());
+	    
 	}
 	@When("They click on the first available flight")
 	public void they_click_on_the_first_available_flight() throws InterruptedException {
-		By select_button_locator = By.xpath("//button [@type ='buy-button']");
+		driver_wait_long.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span [@class = 'amount price-amount']")));
+		By select_button_locator = By.xpath("//div [@class ='mobile-container']");
 	    clickOnSomething(select_button_locator);
 	}
 	@When("They check if theres an upsell popup to click continue")
@@ -113,6 +108,5 @@ public class FlightValidationTestGluecode {
 	    
 	    //Pause for visual validation
 	    TimeUnit.SECONDS.sleep(2); 
-	    driver.quit();
 	}
 }
